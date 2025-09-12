@@ -1,6 +1,6 @@
 # Slash commands for my Claude Code workflow 
 
-I symlink this repo to `~/.claude/commands`
+I symlink the `commands` dir in this repo to `~/.claude/commands`
 
 These commands reflect my general workflow. Each "session" is a feature, refactoring, or other development goal, ranging from small to potentially very large - the workflow works for a wide range of tasks. I switch models from opus to sonnet based on whether I'm in perspective vs implementation mode.
 1. Start a "dev session" - to capture spec, plans, session recaps, and final recap and PR description
