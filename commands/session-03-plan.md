@@ -39,6 +39,10 @@ The plan should include:
     for illustration or critical context purposes, but not large chunks of
     detailed code.
 
+When referencing other files and important sources, suggest that the entire
+file be read in full before implementation proceeds. If the contents are
+especially important, state that the file or resource MUST be read in full. 
+
 Testing guidelines:
 - Testing must be part of the phase in which the code is written, each phase
   including tests that validate success criteria. Do not save all the testing
@@ -53,4 +57,37 @@ Testing guidelines:
   mocks are worse than no tests at all. We prefer integration tests over mocks.
   If you think mocks are the best testing strategy, raise this to me and we
   will carefully design the strategy together.
+
+There are two critical steps the must be added to each phase, one at the start
+and the other at the end.
+
+Initial task for each phase: (include literally, do not compress this)
+
+    Re-read all documents in the dev session directory in full to ensure
+    complete context. Every file must be read from start to finish, no
+    exceptions. No summarizations or skipping of files or sections are
+    allowed.
+
+Provide the full path to the dev session directory in this plan step.
+
+Final task for each phase: (include literally, do not compress this)
+
+    Write out a file in the dev session folder, `phaseN-context.md` where N is
+    the current phase number, which is suitable for giving a fresh, blank-slate
+    Claude Code session the detailed information it needs to understand what
+    happened in this phase so that it can confidently tackle the next one.
+    This includes but is not limited to:
+    - key initial context: a summary of the spec goals, locations of the
+      spec/plan files in the dev session for further reading, and any other
+      critical facts or instructions that have been given that must be
+      remembered.
+    - a concise but detailed recapitulation of work that was done
+    - problems or unexpected situations encountered and how they were
+      addressed, and anything that deviated from the plan or was not captured
+      in the plan.
+    - anything that is currently expected to be broken or has not been
+      validated/tested
+
+    After writing this file, commit the changes to your working branch and push
+    them to remote.
 

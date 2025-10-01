@@ -1,27 +1,12 @@
-I want to execute the plan for the current dev session.
+I want you to implement the next (or first if applicable) phase for the plan in
+the current dev session.
 
 We should have a plan.md and spec.md for the current dev session. Confirm that
 we have these files.
 
-Read the plan.md and spec.md files, as well as any other referenced material
-needed for proper, full context. Do not rely on summaries for critical context
-documents.
-
-If the plan is detailed and ready for implementation, execute the plan.
-
-Before starting, learn your whitelisted bash commands and try to use them over
-logically equivalent bash commands than have not been whitelisted. There are
-four possible cumulative configuration file locations for these:
-1. $HOME/.claude/settings.json
-2. $HOME/.claude/settings.local.json
-3. .claude/settings.json in the current project
-4. .claude/settings.local.json in the current project
-
-For example, if `rg` is whitelisted but `grep` is not, do the search with `rg`.
-
-Avoid changing directories unless absolutely needed. You forget where you
-are and are slowed down by commands failing due to an unexpected working
-directory.
+Read the plan.md and spec.md files in full, as well as any other referenced
+material needed for proper, full context. Do not rely on summaries for critical
+context documents.
 
 **CRITICAL RULES FOR TESTING:**
 - **NEVER DELETE OR DISABLE TESTS.** The purpose of tests is to verify that the
@@ -44,22 +29,6 @@ directory.
   hallucination, the rule is: *no mocks*. Exception: you have been given direct
   instruction on how and what to mock in the plan document.
 
-At the end of each phase, write out a file in the dev session folder,
-`phaseN-context.md` which is suitable for giving a fresh, blank-slate Claude
-Code session the detailed information it needs to confidently tackle the next
-phase. That includes but is not limited to:
-- key initial orientation: a summary of the spec goals, locations of the spec/plan
-  files in the dev session for further reading, and any other critical facts or
-  instructions that have been given to you outside those files that you must
-  remember.
-- a concise but detailed recapitulation of work that was done in the completed
-  phase
-- problems or unexpected situations encountered and how they were addressed
-- anything that is currently expected to be broken or has not been
-  validated/tested
-
-After writing this file, commit your changes to git (local only, without
-pushing to remote).
-
-I will review the work and either ask for changes or direct you to proceed with
-the next phase. Do not automatically proceed with further phases.
+At the end of each phase, I will review the work and either ask for changes or
+direct you to proceed with the next phase. Do not automatically proceed with
+further phases.

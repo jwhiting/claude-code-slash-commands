@@ -2,11 +2,9 @@ I want to recapitulate the work for the current dev session.
 
 There should be a directory of markdown documents and artifacts for the current
 dev session. The name of the directory should be called
-`docs/dev-sessions/$(date +"%Y-%m-%d-%H%M")-{slug}` where `$(date
+`docs/dev-sessions/{slug}-$(date +"%Y-%m-%d-%H%M")` where `$(date
 +"%Y-%m-%d-%H%M")` is a bash command and `{slug}` is a short description of the
-session. If you don't know the current dev session from context already, derive
-the slug from the name of the current git branch, otherwise ask me to provide a
-short description.
+session.
 
 Read all the files in the dev session directory in full, especially the spec,
 plan, and the phaseN-context docs. You might also want to look at git commit
@@ -25,5 +23,4 @@ Then update these files:
   and 'production ready' unless they are truly accurate and warranted from
   a critical review perspective. be neutral, accurate, concise, and helpful.
 
-After writing these, commit your changes to git (local only, without pushing to
-remote).
+After writing these, commit your changes to git and push to remote.
