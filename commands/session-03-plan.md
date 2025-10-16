@@ -24,6 +24,8 @@ The plan should include:
   any nuanced issues, complexities, non-obvious implementation details or
   constraints that apply at the overall plan/spec level (each phase gets this
   as well.)
+- The testing policies (from below), copied verbatim, so the implementing agent
+  has them for reference (phases require explict adherence reports.)
 - The phases and steps outline, each phase having at least these sections (but
   can include more if relevant):
   - Numbered phase title
@@ -60,24 +62,43 @@ file be read in full before implementation proceeds. If the contents are
 especially important, state that the file or resource MUST be read in full. 
 
 Critical Testing Policies (apply to Test-Bound phases only):
-1. **Execution Required**: Tests must be executed, not just written
-2. **All Must Pass**: Proceeding with failing tests is prohibited
-3. **No Test Manipulation**: Disabling, skipping, or deleting tests to achieve
-   passing status is prohibited
-4. **No Scope Reduction**: Reducing functionality to avoid test failures is prohibited
-5. **No Mocks Without Plan or User Approval**: Due to LLM hallucination risks,
-   write integration tests; raise to user if mocks are necessary and the plan
-   didn't already specify using them.
-6. **Validate Existing Tests**: When modifying code, existing test coverage must pass
-
-Testing guidelines:
-- Testing must be part of the phase in which the code is written when testable
-  functionality is created. Each phase should clearly state its testing approach:
-  either it includes tests, defers them to a specific later phase, or explains
-  why testing doesn't apply.
-- Strike a balance between under-testing and over-testing. Validate the core
-  functionality and key use cases that ensure the specification requirements
-  are met, but don't test every little permutation.
+1. **Test at development time, not later**: unless explicitly exempted as part
+   of the plan design, phases must include the work to write, update, and run
+   tests in context as core work of any given phase. Do not buffer up critical
+   validation to a separate "testing" phase at the end, unless the plan truly
+   requires it due to implementation complexity or test design limitations.
+2. **Aim for 80% coverage:** Unless given directed coverage and test case
+   scenarios by the user's plan, cover all core "happy path" functionality and
+   key use cases that ensure the specification requirements are met, but don't
+   test every little permutation or error scenario with diminishing returns.
+3. **Carefully and explicitly identify what test suites should be run**:
+   Identify by name all applicable test files for any new, modified, or
+   potentially impacted code.
+4. **Execution required**: Tests must be executed, not just written
+5. **All must pass**: Proceeding with failing tests is prohibited
+6. **No test manipulation or scope reduction**: Disabling, skipping, deleting,
+   or reducing scope of tests to create a false sense of completion is
+   prohibited. Face into the challenge of fixing failing tests. For example:
+   - Grossly outright deleting, disabling, or skipping tests is something you
+     sometimes will be strongly tempted to do (and have done in the past). This
+     is a fundamental failure of your technical professionalism.
+   - Disabling tests that require an environment variable if that variable is
+     missing is prohibited. This might seem convenient, but it leaves critical
+     code fundamentally unverified. Raise the missing environment variable (or
+     any other missing precondition for success) to the user.
+   - Disabling options/features just because they cause problems in tests is
+     prohibited. It fails to verify the code.
+   - If a test removal or reduction is advisable, raise to the user for review.
+7. **No Mocks Without Plan or User Approval**: Due to LLM hallucination risks,
+   write integration tests. **Inaccurate mocks are worse than no tests at
+   all.** Raise to user if mocks are advisable and the plan didn't already
+   specify using them.
+8. **Clear failure is ALWAYS better than unclear validation or false success:**
+   the user strongly prefers for you to stop and raise issues and have code
+   default to a failure assertion than to claim success when the situation has
+   not been fully understood and validated. Claiming success without proper
+   understanding and validation or at least raising the problems to the user,
+   is **extremely frustrating and emotionally painful for the user.**
 
 There are critical steps that must be added to each phase. The exact steps depend
 on whether the phase is Test-Bound or Test-Exempt:
@@ -95,22 +116,18 @@ Penultimate task FOR TEST-BOUND PHASES - Test Verification and Report:
 (include this step literally for any Test-Bound phase)
 
     SUBSTEP 1: Self-Evaluate Testing Policy Adherence
-    Before executing tests, explicitly audit your work against the Critical
-    Testing Policies. For each policy, state whether you adhered to it. If you
-    violated any policy (e.g., disabled a test, reduced scope to avoid failures,
-    skipped test execution), STOP and remediate before proceeding.
+    Explicitly audit your work against the Critical Testing Policies. For each
+    numbered policy, state in chat whether you adhered to it. If you violated
+    any policy (e.g., didn't identify and run all the correct test suites,
+    disabled or reduced a test, traded verification for the illusion of
+    success), STOP and remediate before proceeding, or STOP and raise the issue
+    to the user for review.
 
-    SUBSTEP 2: Execute Tests
-    1. Identify all test files that should be run for this phase
-    2. Execute each test suite and capture full output in bash tool (do not
-       pipe to tail or grep)
-    3. If ANY tests fail: debug and fix issues, then repeat from step 2
-
-    SUBSTEP 3: Generate Test Report
+    SUBSTEP 2: Generate Test Report
     Output a summary report to the chat session containing:
     - List of all test files executed with full paths
     - Total counts: tests run, passed, failed, skipped
-    - Policy adherence statement: Confirm adherence to all 6 Critical Testing
+    - Policy adherence statement: Confirm adherence to all 8 Critical Testing
       Policies, or document any violations and how they were resolved
     - If applicable: any tests deferred to later phases per the plan
 
