@@ -33,18 +33,21 @@ The plan should include:
   - Success criteria
   - "Keep in mind" section with any nuanced issues, complexities, non-obvious
     implementation details or constraints pertaining to this phase.
+  - Phase Classification: Each phase MUST declare itself as either:
+    * **Test-Bound** - Critical Testing Policies apply, verification step required
+    * **Test-Exempt** - Testing policies do not apply to this phase
   - Testing approach declaration: Each phase MUST explicitly state one of:
     a) "This phase includes [new tests and/or validation of existing tests] for
-       [what is being tested]" - triggers mandatory test execution requirements
-    b) "Tests for this functionality will be implemented in Phase X" - defers but
-       commits to future testing
-    c) "No tests required because [specific reason]" - exempts from test requirements
+       [what is being tested]" - marks phase as Test-Bound
+    b) "Tests for this functionality will be implemented in Phase X" - marks
+       phase as Test-Exempt (defers testing)
+    c) "No tests required because [specific reason]" - marks phase as Test-Exempt
   - Then the series of numbered steps, with enough detail that they can be
     reliably completed given spec and plan as context, but without doing the
     actual work of the step. It's good to have code snippets when helpful
     for illustration or critical context purposes, but not large chunks of
     detailed code.
-  - MANDATORY FOR TEST PHASES: If option (a) above, the phase MUST include
+  - MANDATORY FOR TEST-BOUND PHASES: If option (a) above, the phase MUST include
     explicit test execution steps that require passing tests to proceed. (e.g.,
     "Run test suite X and verify all tests pass before moving to the next
     step.") Test execution and correction steps are core implementation work,
@@ -56,6 +59,17 @@ When referencing other files and important sources, suggest that the entire
 file be read in full before implementation proceeds. If the contents are
 especially important, state that the file or resource MUST be read in full. 
 
+Critical Testing Policies (apply to Test-Bound phases only):
+1. **Execution Required**: Tests must be executed, not just written
+2. **All Must Pass**: Proceeding with failing tests is prohibited
+3. **No Test Manipulation**: Disabling, skipping, or deleting tests to achieve
+   passing status is prohibited
+4. **No Scope Reduction**: Reducing functionality to avoid test failures is prohibited
+5. **No Mocks Without Plan or User Approval**: Due to LLM hallucination risks,
+   write integration tests; raise to user if mocks are necessary and the plan
+   didn't already specify using them.
+6. **Validate Existing Tests**: When modifying code, existing test coverage must pass
+
 Testing guidelines:
 - Testing must be part of the phase in which the code is written when testable
   functionality is created. Each phase should clearly state its testing approach:
@@ -63,17 +77,10 @@ Testing guidelines:
   why testing doesn't apply.
 - Strike a balance between under-testing and over-testing. Validate the core
   functionality and key use cases that ensure the specification requirements
-  are met, but don't test every little permutation. Consider when a test case
-  is a minor, adding only diminishing returns, and only add it if it's
-  sufficiently short and simple in that case.
-- Avoid mocks. This is because you are an LLM that has a tendency to
-  hallucinate when creating mocks, and tests against hallucinated
-  mocks are worse than no tests at all. We prefer integration tests over mocks.
-  If you think mocks are the best testing strategy, raise this to me and we
-  will carefully design the strategy together.
+  are met, but don't test every little permutation.
 
 There are critical steps that must be added to each phase. The exact steps depend
-on whether the phase includes test writing:
+on whether the phase is Test-Bound or Test-Exempt:
 
 Initial task for EVERY phase: (include literally, do not compress this)
 
@@ -84,34 +91,31 @@ Initial task for EVERY phase: (include literally, do not compress this)
 
 Provide the full path to the dev session directory in this plan step.
 
-Penultimate task FOR PHASES THAT INCLUDE TESTING - Test Verification and Report:
-(include this step literally for any phase that writes or modifies tests)
+Penultimate task FOR TEST-BOUND PHASES - Test Verification and Report:
+(include this step literally for any Test-Bound phase)
 
-    Execute ALL tests that were planned or written during this phase and generate
-    output a report. This step is MANDATORY for phases with tests.
+    SUBSTEP 1: Self-Evaluate Testing Policy Adherence
+    Before executing tests, explicitly audit your work against the Critical
+    Testing Policies. For each policy, state whether you adhered to it. If you
+    violated any policy (e.g., disabled a test, reduced scope to avoid failures,
+    skipped test execution), STOP and remediate before proceeding.
 
-    1. First, identify all test files that should be run for this phase
-    2. Execute each test suite and capture the full output in the bash tool (do
-       not pipe test output to a tail or grep command.)
-    3. Output to the chat session a summary report with:
-       - List of all test files executed with their full paths
-       - Total number of tests run, passed, failed, skipped
-       - If ANY tests fail: the specific failures and error messages
-       - Any tests that were skipped, abandoned, or deferred due to difficulty
-         (unacceptable)
-    4. Tests MUST ALL PASS, without any skips deferment, before proceeding.
-       Otherwise, debug and fix the issues, and repeat from step 3.
+    SUBSTEP 2: Execute Tests
+    1. Identify all test files that should be run for this phase
+    2. Execute each test suite and capture full output in bash tool (do not
+       pipe to tail or grep)
+    3. If ANY tests fail: debug and fix issues, then repeat from step 2
 
-    CRITICAL: Writing tests without executing them is a fundamental failure.
-    Changing code without asserting its existing test coverage still passes is
-    a fundmental failure. Abandoning some planned or requested tests because
-    difficulties arise or because you think the most important things still
-    work is a fundamental failure. The phase cannot be considered complete
-    until all relevant tests pass and the user has been shown the clean and
-    accurate test summary report in the chat session.
+    SUBSTEP 3: Generate Test Report
+    Output a summary report to the chat session containing:
+    - List of all test files executed with full paths
+    - Total counts: tests run, passed, failed, skipped
+    - Policy adherence statement: Confirm adherence to all 6 Critical Testing
+      Policies, or document any violations and how they were resolved
+    - If applicable: any tests deferred to later phases per the plan
 
-    If a serious problem arises that prevents effective tests from being
-    written or passing, STOP and ask the user for guidance.
+    Tests MUST ALL PASS before proceeding. If a serious problem prevents tests
+    from being written or passing, STOP and ask for user guidance.
 
 Final task for each phase: (include literally, do not compress this)
 
@@ -125,10 +129,9 @@ Final task for each phase: (include literally, do not compress this)
       critical facts or instructions that have been given that must be
       remembered.
     - a concise but detailed recapitulation of work that was done
-    - TEST EXECUTION REPORT (if applicable): If this phase included tests,
-      include the complete test report from the penultimate step, showing all
-      tests were run and passed. If tests were not included, document the
-      reason.
+    - Test execution report (Test-Bound phases only): If this was a Test-Bound
+      phase, include the complete test report from the penultimate step to
+      document policy adherence. If Test-Exempt, document the reason.
     - problems or unexpected situations encountered and how they were
       addressed, and anything that deviated from the plan or was not captured
       in the plan.
