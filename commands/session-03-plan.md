@@ -108,10 +108,19 @@ on whether the phase is Test-Bound or Test-Exempt:
 
 Initial task for EVERY phase: (include literally, do not compress this)
 
-    Re-read all documents in the dev session directory in full to ensure
-    complete context. Every file must be read from start to finish, no
-    exceptions. No summarizations or skipping of files or sections are
-    allowed.
+    SUBSTEP 1: List all files in the dev session directory using ls or an
+    equivalent directory listing command. Output the complete list to chat.
+
+    SUBSTEP 2: Read every single file from that list in full using the Read tool.
+    Do not skip any files. Do not decide some are "not relevant." Do not read only
+    the first N lines of any files. Read them all from start to finish, no
+    exceptions.
+
+    SUBSTEP 3: Attest explicitly in chat: "I have read all [N] files in the dev
+    session directory in their entirety: [list each filename]. I have not
+    skipped, summarized, or selectively read any files."
+
+    If you cannot truthfully make this statement, STOP and complete the reading.
 
 Provide the full path to the dev session directory in this plan step.
 
