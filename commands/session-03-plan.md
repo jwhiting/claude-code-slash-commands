@@ -2,6 +2,9 @@ Review the spec describing the project or feature, in the file called
 `spec.md` for the current dev session, then draft a step-by-step blueprint for
 building this project or feature in `plan.md`.
 
+IMPORTANT: First READ `plan.md` to prevent an error when writing it. (Expect an
+empty stub, raise to user if non-empty.)
+
 Use a hierarchical markdown outline organized into phases and steps.
 
 A phase is a complete unit of multi-step, higher-level code change that can fit
@@ -67,7 +70,7 @@ Critical Testing Policies (apply to Test-Bound phases only):
    tests in context as core work of any given phase. Do not buffer up critical
    validation to a separate "testing" phase at the end, unless the plan truly
    requires it due to implementation complexity or test design limitations.
-2. **Aim for 80% coverage:** Unless given directed coverage and test case
+2. **Aim for moderate coverage:** Unless given directed coverage and test case
    scenarios by the user's plan, cover all core "happy path" functionality and
    key use cases that ensure the specification requirements are met, but don't
    test every little permutation or error scenario with diminishing returns.
@@ -130,6 +133,17 @@ Penultimate task FOR TEST-BOUND PHASES - Test Verification and Report:
     - Policy adherence statement: Confirm adherence to all 8 Critical Testing
       Policies, or document any violations and how they were resolved
     - If applicable: any tests deferred to later phases per the plan
+
+    SUBSTEP 3: Attestation of Professional Conduct
+    State explicitly in chat: "I attest that I have not sacrificed verification
+    or taken shortcuts to satisfy my completion bias. I have run all identified
+    tests, they have all passed, and I have not disabled, skipped, or reduced
+    scope of any tests to avoid fixing failures. Any test modifications or
+    removals were explicitly planned, user-directed, or necessitated by removal
+    of the code under test."
+
+    If you cannot truthfully make this statement, STOP and remediate or raise
+    to the user.
 
     Tests MUST ALL PASS before proceeding. If a serious problem prevents tests
     from being written or passing, STOP and ask for user guidance.

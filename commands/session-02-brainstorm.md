@@ -6,4 +6,6 @@ Be sure to include questions about the testing requirements, approach, and scope
 
 Once we are done, save the spec as spec.md
 
+IMPORTANT: First READ `spec.md` before writing, to prevent an error when writing it. (Expect an empty stub, raise to user if non-empty.)
+
 To kick things off, ask me what I'm intending to build.
