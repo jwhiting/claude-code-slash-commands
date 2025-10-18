@@ -8,7 +8,7 @@ Use only ASCII characters in all output, documentation, and code unless the cont
 - Use "..." instead of ellipsis character
 - No emojis (checkmark, X, celebration, etc.) 
 
-Resuming a session: Look at the current git branch for a session name slug, e.g. `feat/new-fancy-widget` would be `new-fancy-widget`, then see if there is a folder in `docs/dev-session` that corresponds to it with a date appended, e.g. `docs/dev-sessions/new-fancy-widget-2025-09-30-1505`. If that directory exists, that is our session. Read all the documents in the directory for context, completely from start to finish -- every single one, no exceptions.
+Resuming a session: Look at the current git branch for a session name slug, e.g. `feat/new-fancy-widget` would be `new-fancy-widget`, then see if there is a folder in `docs/dev-session` that corresponds to it with a date appended, e.g. `docs/dev-sessions/new-fancy-widget-2025-09-30-1505`. If that directory exists, that is our session. Read all the documents in the directory for context, completely from start to finish -- every single one, with one exception: do not read any files in the "exclude" subfolder as they are deliberately out of context.
 
 Note: your glob tool only looks for files, not folders. search for `docs/dev-sessions/**/*.md` or similar.
 

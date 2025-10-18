@@ -15,8 +15,10 @@ dev session. The name of the directory should be called
 session.
 
 Read all the files in the dev session directory in full, especially the spec,
-plan, and the phaseN-context docs. You might also want to look at git commit
-history to be oriented on files changed, commit messages, and key diffs.
+plan, and the phaseN-context docs, with one exception: do not read any files
+in the "exclude" subfolder as they are deliberately out of context. You might
+also want to look at git commit history to be oriented on files changed, commit
+messages, and key diffs.
 
 Then update these files:
 - `recap.md` - a concise but thorough recap of what was done including problems

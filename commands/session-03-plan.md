@@ -132,18 +132,26 @@ on whether the phase is Test-Bound or Test-Exempt:
 Initial task for EVERY phase: (include literally, do not compress this)
 
     SUBSTEP 1: List all files in the dev session directory using fresh
-    execution of ls or an equivalent directory listing command, not from
-    memory. Output the complete list to chat.
+    execution of ls or an equivalent directory listing command, not from memory.
+    Output the complete list to chat. Use a simple command that is guaranteed to
+    be reliable (no fancy options or flags). This should be a short list of
+    files. It will also potentially reveal files inside a special "exclude"
+    folder, which will be ignored in the next step.
 
-    SUBSTEP 2: Read every single file from that list in full using the Read tool.
-    Do not skip any files. Do not decide some are "not relevant." Do not read only
-    the first N lines of any files. Read them all from start to finish, no
-    exceptions.
+    SUBSTEP 2: Read every single file from that list in full using the Read
+    tool, except for files in the "exclude" subfolder if present.  Do not skip
+    any other files (any files outside of the "exclude" folder).  Do not decide
+    some are "not relevant." Do not read only the first N lines of any files.
+    Read them all from start to finish, with only one solitary exception: skip
+    all files in the "exclude" subfolder.
 
-    SUBSTEP 3: Attest explicitly in chat: "I freshly discovered and read all [N]
-    files in the dev session directory in their entirety: [list each filename].
-    I have not skipped, summarized, or selectively read any files currently
-    present on the filesystem in that folder."
+    SUBSTEP 3: Attest compliance explicitly in chat: "I freshly listed and read
+    all [N] non-excluded files in the dev session directory in their entirety:
+    [list each filename that is not in the exclude folder]. I have not skipped,
+    summarized, or selectively read any files currently present on the
+    filesystem in the dev session folder, except for files in the "exclude"
+    subfolder, which I deliberately ignored as the only exception to this
+    full reading requirement."
 
     If you cannot truthfully make this statement, STOP and complete the reading.
 
