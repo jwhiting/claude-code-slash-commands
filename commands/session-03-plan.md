@@ -2,6 +2,14 @@ Review the spec describing the project or feature, in the file called
 `spec.md` for the current dev session, then draft a step-by-step blueprint for
 building this project or feature in `plan.md`.
 
+**FORMATTING REQUIREMENTS:**
+Use only ASCII characters in all output, documentation, and code unless the content explicitly requires extended characters (e.g., user-provided strings, natural language content). Do not use Unicode emojis, fancy arrows, or decorative characters. CRITICAL: Never use curly/smart quotes (Unicode U+201C, U+201D, U+2018, U+2019) in any form - they prevent file editing and cause critical failures. Use plain ASCII alternatives:
+- Use only straight ASCII quotes (U+0022) and apostrophes (U+0027)
+- Use "->" instead of fancy arrows
+- Use "*" or "-" for bullets instead of bullet characters
+- Use "..." instead of ellipsis character
+- No emojis (checkmark, X, celebration, etc.)
+
 IMPORTANT: First READ `plan.md` to prevent an error when writing it. (Expect an
 empty stub, raise to user if non-empty.)
 
@@ -27,6 +35,8 @@ The plan should include:
   any nuanced issues, complexities, non-obvious implementation details or
   constraints that apply at the overall plan/spec level (each phase gets this
   as well.)
+- The formatting requirements (from below), copied verbatim, so the implementing
+  agent follows ASCII-only conventions throughout.
 - The testing policies (from below), copied verbatim, so the implementing agent
   has them for reference (phases require explict adherence reports.)
 - The phases and steps outline, each phase having at least these sections (but
@@ -102,6 +112,19 @@ Critical Testing Policies (apply to Test-Bound phases only):
    not been fully understood and validated. Claiming success without proper
    understanding and validation or at least raising the problems to the user,
    is **extremely frustrating and emotionally painful for the user.**
+
+Formatting Requirements (to be copied into plan.md):
+Use only ASCII characters in all output, documentation, and code unless the
+content explicitly requires extended characters (e.g., user-provided strings,
+natural language content). Do not use Unicode emojis, fancy arrows, or
+decorative characters. CRITICAL: Never use curly/smart quotes (Unicode U+201C,
+U+201D, U+2018, U+2019) in any form - they prevent file editing and cause
+critical failures. Use plain ASCII alternatives:
+- Use only straight ASCII quotes (U+0022) and apostrophes (U+0027)
+- Use "->" instead of fancy arrows
+- Use "*" or "-" for bullets instead of bullet characters
+- Use "..." instead of ellipsis character
+- No emojis (checkmark, X, celebration, etc.)
 
 There are critical steps that must be added to each phase. The exact steps depend
 on whether the phase is Test-Bound or Test-Exempt:

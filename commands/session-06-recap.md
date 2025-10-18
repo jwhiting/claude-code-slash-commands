@@ -1,5 +1,13 @@
 I want to recapitulate the work for the current dev session.
 
+**FORMATTING REQUIREMENTS:**
+Use only ASCII characters in all output, documentation, and code unless the content explicitly requires extended characters (e.g., user-provided strings, natural language content). Do not use Unicode emojis, fancy arrows, or decorative characters. CRITICAL: Never use curly/smart quotes (Unicode U+201C, U+201D, U+2018, U+2019) in any form - they prevent file editing and cause critical failures. Use plain ASCII alternatives:
+- Use only straight ASCII quotes (U+0022) and apostrophes (U+0027)
+- Use "->" instead of fancy arrows
+- Use "*" or "-" for bullets instead of bullet characters
+- Use "..." instead of ellipsis character
+- No emojis (checkmark, X, celebration, etc.)
+
 There should be a directory of markdown documents and artifacts for the current
 dev session. The name of the directory should be called
 `docs/dev-sessions/{slug}-$(date +"%Y-%m-%d-%H%M")` where `$(date
